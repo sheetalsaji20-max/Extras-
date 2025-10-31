@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string isBalanced(string s) {
+    stack<char> st;
+    for (char ch : s) {
+        if (ch == '(' || ch == '{' || ch == '[') {
+            st.push(ch);
+        } 
+        else {
+            if (st.empty()) return "NO";
+            char top = st.top();
+            if ((ch == ')' && top != '(') ||
+                (ch == '}' && top != '{') ||
+                (ch == ']' && top != '[')) {
+                return "NO";
+            }
+            st.pop(); // matched pair, pop it
+        }
+    }
+    return st.empty() ? "YES" : "NO";
+}
+
+int main() {
+    int n;
+    cin >> n;
+    while (n--) {
+        string s;
+        cin >> s;
+        cout << isBalanced(s) << endl;
+    }
+    return 0;
+}
